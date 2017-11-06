@@ -60,6 +60,7 @@ def setWallPaper(imagePath):
     bmpImage = Image.open(imagePath)
     newPath = imagePath.replace('.jpg', '.bmp')
     bmpImage.save(newPath, "BMP")
+    return newPath
 
 
 def isNeedUpdate():
@@ -75,7 +76,8 @@ def setWallpaperFromBMP():
     win32api.RegSetValueEx(k, "WallpaperStyle", 0, win32con.REG_SZ, "2") #2拉伸适应桌面,0桌面居中
     win32api.RegSetValueEx(k, "TileWallpaper", 0, win32con.REG_SZ, "0")
     path = setWallPaper(currentPwd())
-    win32gui.SystemParametersInfo(win32con.SPI_SETDESKWALLPAPER, path, 1+2)
+    print('newPath:'+path)
+    win32gui.SystemParametersInfo(win32con.SPI_SETDESKWALLPAPER, path, 3)
 
 def currentPwd():
     ll = os.getcwd()+'/imgs/'+currentDay+'.jpg'
